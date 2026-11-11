@@ -1,0 +1,47 @@
+# Aplikasi React Pertama - Mini Project
+
+Aplikasi web interaktif yang dibuat menggunakan
+React dan Vite.
+
+## Fitur Aplikasi
+
+1. Greeting Form
+   - Input nama pengguna.
+   - Menampilkan sapaan secara langsung.
+
+2. Counter
+   - Menghitung jumlah klik.
+   - Angka bertambah setiap tombol ditekan.
+
+3. Profile Card
+   - Input profesi atau pekerjaan.
+   - Menampilkan profesi secara langsung.
+   - Tombol Suka untuk menghitung jumlah likes.
+
+## Teknologi yang Digunakan
+
+- React JS
+- JavaScript
+- CSS
+- Vite
+
+## Struktur Folder
+
+src/
+- components/
+  - Counter.jsx
+  - GreetingForm.jsx
+  - ProfileCard.jsx
+- App.jsx
+- App.css
+- main.jsx
+
+## Cara Menjalankan Aplikasi
+
+1. Buka terminal di folder proyek.
+2. Jalankan perintah:
+
+   npm run dev
+
+3. Buka browser.
+4. Akses alamat http://localhost:5173

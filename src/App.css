@@ -1,0 +1,659 @@
+/* src/App.css (Tambahkan di bagian bawah) */
+
+.directory-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: center;
+}
+
+.directory-title {
+    font-size: 28px;
+    color: #0f172a;
+    margin-bottom: 16px;
+}
+
+/* Widget 3-Card Statistik (Hasil Tugas Modul 1.3 - Desain Tetap Utuh) */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto 24px;
+}
+
+.stat-box {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.stat-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0284c7;
+    line-height: 1.1;
+}
+
+.stat-num.online {
+    color: #16a34a;
+}
+
+.stat-num.offline {
+    color: #64748b;
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 18px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 24px;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+}
+
+/* Grid Responsif Pengganti List Vertikal 1.3 */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.team-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.card-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+}
+
+.card-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.card-role {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.badge-online {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.badge-offline {
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.btn-status-toggle {
+    margin-top: 14px;
+    padding: 8px 14px;
+    border: none;
+    background: #0f172a;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* CSS Tambahan: Badges, Stars & Empty State (Tugas Mandiri) */
+.card-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.badge-stars {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-star {
+    margin-top: 14px;
+    padding: 8px 14px;
+    border: none;
+    background: #f59e0b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    background: #fffbeb;
+    border: 2px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: #b45309;
+    font-weight: 600;
+}
+/* Rating Bintang Interaktif */
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 2px;
+  transition: 0.2s;
+}
+
+.star.active {
+  color: #f59e0b;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.rating-text {
+  font-size: 12px;
+  color: #64748b;
+  margin: 5px 0 10px;
+}
+/* Kontainer Form Tambah Anggota */
+.add-member-form {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.form-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-align: left;
+  color: #0F172A;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+/* Indikator Validasi Error Zod */
+.input-error {
+  border-color: #EF4444 !important;
+  background: #FEF2F2;
+}
+
+.error-text {
+  color: #DC2626;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Tombol Submit Form */
+.btn-submit {
+  background: #0284C7;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.card-bio {
+  font-size: 13px;
+  font-style: italic;
+  color: #64748B;
+  margin: 4px 0 10px 0;
+}
+/* ===== MODUL 1.6: TAMPILAN BERITA ===== */
+
+.app-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: system-ui, sans-serif;
+}
+
+.main-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.main-content {
+  margin-top: 24px;
+}
+
+.tab-bar {
+  display: inline-flex;
+  gap: 8px;
+  background: #e2e8f0;
+  padding: 6px;
+  border-radius: 12px;
+  margin-top: 14px;
+}
+
+.tab-btn {
+  padding: 10px 22px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #fff;
+  color: #2563eb;
+}
+
+.news-container {
+  width: 100%;
+}
+
+.news-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-refresh {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner-box {
+  text-align: center;
+  padding: 48px;
+  color: #64748b;
+}
+
+.css-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-banner {
+  background: #fef2f2;
+  border: 1.5px solid #ef4444;
+  color: #991b1b;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.error-banner button {
+  margin-top: 12px;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.news-card {
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.news-thumb-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+}
+.news-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.news-card:hover .news-thumb {
+    transform: scale(1.05);
+}
+.news-category-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(37, 99, 235, 0.9);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  font-weight: 700;
+}
+.news-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.news-headline {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+  transition: color 0.3s ease;
+}
+.news-card:hover .news-headline {
+    color: #2563eb;
+}
+.news-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #94a3b8;
+}
+.news-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.news-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+/* ===== TOMBOL PILIHAN SUMBER BERITA ===== */
+
+.source-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px;
+  background: #f1f5f9;
+  border-radius: 14px;
+  width: fit-content;
+  margin: 15px auto;
+}
+
+.source-selector button {
+  border: none;
+  padding: 11px 25px;
+  border-radius: 10px;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Tombol aktif */
+
+.source-selector button.active {
+  background: white;
+  color: #2563eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+/* Efek saat disentuh */
+
+.source-selector button:hover {
+  color: #2563eb;
+  background: white;
+  transform: translateY(-2px);
+}
+
+/* ===== TOOLBAR BERITA ===== */
+
+.news-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+  .news-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .source-selector {
+    margin: 10px 0;
+  }
+}
+/* Tombol pilihan sumber berita */
+.source-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+/* Tampilan tombol */
+.source-selector button {
+  border: none;
+  padding: 10px 22px;
+  border-radius: 9px;
+  background: transparent;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Tombol saat dipilih */
+.source-selector button.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2);
+}
+
+/* Efek saat diarahkan mouse */
+.source-selector button:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.source-selector button.active:hover {
+  background: #1d4ed8;
+  color: white;
+}
+.news-toolbar > div:first-child {
+  flex: 1;
+}
+
+/* Posisi tombol sumber berita */
+.source-selector {
+  flex-shrink: 0;
+}
+
+/* Tombol segarkan berita */
+.news-toolbar .btn-refresh {
+  flex-shrink: 0;
+}
+
+/* Tampilan layar kecil */
+@media (max-width: 600px) {
+  .news-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* Judul berita lebih modern */
+.news-toolbar h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #172554;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+/* Keterangan jumlah artikel */
+.news-toolbar p {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 5px;
+}
+
+/* Efek tombol saat diklik */
+.source-selector button:active {
+  transform: scale(0.96);
+}
+/* Halaman 404 */
+.not-found-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.not-found-code {
+  font-size: 80px;
+  font-weight: 900;
+  color: #ef4444;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.not-found-container h2 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.not-found-container p {
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 22px;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
