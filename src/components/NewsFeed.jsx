@@ -1,162 +1,90 @@
 import { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';
+import { mapNewsItems } from './newsMapper';
 
-function normalizeNewsData(rawItem, sourceName) {
-  return {
-    title: rawItem.title || 'Tanpa Judul',
-    image:
-      rawItem.image ||
-      rawItem.image_thumbnail ||
-      rawItem.thumbnail ||
-      '',
-    date:
-      rawItem.date ||
-      rawItem.time ||
-      rawItem.isoDate ||
-      'Hari ini',
-    category:
-      rawItem.category ||
-      sourceName.toUpperCase(),
-    link: rawItem.link || '#',
-    snippet:
-      rawItem.content ||
-      rawItem.description ||
-      rawItem.snippet ||
-      ''
-  };
+const NEWS_URL = 'https://berita-indo-api.vercel.app/v1/cnn-news';
+
+async function fetchNewsItems(signal) {
+    const res = await fetch(NEWS_URL, { signal });
+    if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+    const json = await res.json();
+    return mapNewsItems(json.data);
 }
 
 function NewsFeed() {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [source, setSource] = useState('kompas');
+    // 1. Tiga Pilar State Pengendali UI
+    const [news, setNews] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  const fetchNews = async () => {
-    setIsLoading(true);
-    setError(null);
+    // 2. Lifecycle Hook: Eksekusi 1x saat Mounting
+    useEffect(() => {
+        const controller = new AbortController();
 
-    try {
-      // Alamat endpoint API
-      const url = `/api/news/${source}`;
+        (async () => {
+            try {
+                const items = await fetchNewsItems(controller.signal);
+                setNews(items);
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                setError(err.message || 'Gagal mengambil berita terkini.');
+            } finally {
+                setIsLoading(false);
+            }
+        })();
 
-      const res = await fetch(url);
+        return () => controller.abort();
+    }, []);
 
-      if (!res.ok) {
-        throw new Error(`HTTP Error: ${res.status}`);
-      }
+    // 3. Refresh manual: state loading diubah dari event handler
+    const handleRefresh = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            setNews(await fetchNewsItems());
+        } catch (err) {
+            setError(err.message || 'Gagal mengambil berita terkini.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-      const json = await res.json();
+    return (
+        <div className="news-container">
+            <div className="news-toolbar">
+                <div>
+                    <h2>Berita Terkini CNN Indonesia</h2>
+                    <p>Menampilkan {news.length} artikel dari Berita Indo API</p>
+                </div>
+                <button className="btn-refresh" onClick={handleRefresh} disabled={isLoading}>
+                    {isLoading ? '⌛ Memuat...' : '🔄 Segarkan Berita'}
+                </button>
+            </div>
 
-      // Menyesuaikan kemungkinan format respons API
-      const rawArticles = Array.isArray(json)
-        ? json
-        : json.data ||
-          json.result ||
-          json.articles ||
-          json.results ||
-          [];
+            {isLoading && (
+                <div className="spinner-box">
+                    <div className="css-spinner"></div>
+                    <p>Mengunduh berita nasional terbaru...</p>
+                </div>
+            )}
 
-      if (!Array.isArray(rawArticles)) {
-        throw new Error('Format data berita tidak valid.');
-      }
+            {error && !isLoading && (
+                <div className="error-banner">
+                    <h5>Terjadi Kesalahan Jaringan</h5>
+                    <p>{error}</p>
+                    <button onClick={handleRefresh}>Coba Lagi</button>
+                </div>
+            )}
 
-      const cleanArticles = rawArticles.map(item =>
-        normalizeNewsData(item, source)
-      );
-
-      setNews(cleanArticles);
-
-    } catch (err) {
-      console.error('Kesalahan mengambil berita:', err);
-      setError(err.message || 'Gagal mengambil berita.');
-      setNews([]);
-
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNews();
-  }, [source]);
-
-  return (
-    <div className="news-container">
-
-      <div className="news-toolbar">
-        <div>
-          <h2>
-            Berita Terkini {source.toUpperCase()}
-          </h2>
-          <p>
-            Menampilkan {news.length} artikel dari RSS Berita
-          </p>
+            {!isLoading && !error && (
+                <div className="news-grid">
+                    {news.map((item, i) => (
+                        <NewsCard key={i} {...item} />
+                    ))}
+                </div>
+            )}
         </div>
-
-        <div className="source-selector">
-          <button
-            onClick={() => setSource('kompas')}
-            className={source === 'kompas' ? 'active' : ''}
-          >
-            📰 Kompas
-          </button>
-
-          <button
-            onClick={() => setSource('cnn')}
-            className={source === 'cnn' ? 'active' : ''}
-          >
-            🌐 CNN
-          </button>
-        </div>
-
-        <button
-          className="btn-refresh"
-          onClick={fetchNews}
-          disabled={isLoading}
-        >
-          {isLoading ? '⏳ Memuat...' : '🔄 Segarkan Berita'}
-        </button>
-      </div>
-
-      {/* Loading */}
-      {isLoading && (
-        <div className="spinner-box">
-          <div className="css-spinner"></div>
-          <p>Mengunduh berita nasional terbaru...</p>
-        </div>
-      )}
-
-      {/* Error */}
-      {error && !isLoading && (
-        <div className="error-banner">
-          <h5>Terjadi Kesalahan Jaringan</h5>
-          <p>{error}</p>
-
-          <button onClick={fetchNews}>
-            Coba Lagi
-          </button>
-        </div>
-      )}
-
-      {/* Berita berhasil dimuat */}
-      {!isLoading && !error && (
-        <div className="news-grid">
-          {news.length > 0 ? (
-            news.map((item, i) => (
-              <NewsCard
-                key={item.link !== '#' ? item.link : i}
-                {...item}
-              />
-            ))
-          ) : (
-            <p>Belum ada berita yang tersedia.</p>
-          )}
-        </div>
-      )}
-
-    </div>
-  );
+    );
 }
 
 export default NewsFeed;

@@ -2,7 +2,7 @@
 import { z } from 'zod';
 
 // 2. Definisikan skema aturan bentuk data anggota tim
-const memberSchema = z.object({
+export const memberSchema = z.object({
     // Kolom nama: tipe string, minimal 3 karakter
     name: z
         .string()
